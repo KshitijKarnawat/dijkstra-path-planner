@@ -7,3 +7,9 @@ dijkstra.py
 @version:   1.0
 """
 
+class NewNode:
+    def __init__(self, coord, parent, cost):
+        self.coord = coord
+        self.parent = parent
+        self.cost = cost
+    
