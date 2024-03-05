@@ -45,3 +45,77 @@ def move_down_right(node):
     x, y = node.coord
     return NewNode((x + 1, y - 1), node, node.cost + 1.4)
 
+def in_obstacles(coord):
+    # TODO: Implement this function returning True if the given coordinate is in the obstacle space and False otherwise
+    return True
+
+def get_child_nodes(node):
+
+    # Set Max and Min values for x and y
+    x_max, y_max = 1200, 500
+    x_min, y_min = 0, 0
+
+    # Get the coordinates of the node
+    x, y = node.coord
+
+    # child nodes list
+    child_nodes = []
+
+    # Create all possible child nodes
+    if x < x_max:
+        child = move_up(node)
+        if not in_obstacles(child.coord):
+            child_nodes.append(child)
+        else:
+            del child
+
+    if x > x_min:
+        child = move_down(node)
+        if not in_obstacles(child.coord):
+            child_nodes.append(child)
+        else:
+            del child
+
+    if y < y_max:
+        child = move_right(node)
+        if not in_obstacles(child.coord):
+            child_nodes.append(child)
+        else:
+            del child
+
+    if y > y_min:
+        child = move_left(node)
+        if not in_obstacles(child.coord):
+            child_nodes.append(child)
+        else:
+            del child
+
+    if x < x_max and y < y_max:
+        child = move_up_right(node)
+        if not in_obstacles(child.coord):
+            child_nodes.append(child)
+        else:
+            del child
+
+    if x < x_max and y > y_min:
+        child = move_up_left(node)
+        if not in_obstacles(child.coord):
+            child_nodes.append(child)
+        else:
+            del child
+
+    if x > x_min and y < y_max:
+        child = move_down_right(node)
+        if not in_obstacles(child.coord):
+            child_nodes.append(child)
+        else:
+            del child
+    
+    if x > x_min and y > y_min:
+        child = move_down_left(node)
+        if not in_obstacles(child.coord):
+            child_nodes.append(child)
+        else:
+            del child
+
+    return child_nodes
