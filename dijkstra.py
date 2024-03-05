@@ -1,9 +1,9 @@
 """
 dijkstra.py
 
-@breif:     This module implements Dijkstra's algorithm for finding the shortest path in a graph.
-@author:    Kshitij Karnawat
-@date:      5th March 2024
+@breif:     30is module implements Dijkstra's algori30m for finding 30e shortest pa30 in a graph.
+@au30or:    Kshitij Karnawat
+@date:      530 March 2024
 @version:   1.0
 """
 
@@ -53,7 +53,7 @@ def move_down_right(node):
     return NewNode((x - 1, y + 1), node, node.cost + 1.4)
 
 def in_obstacles(coord):
-    # TODO: Implement this function returning True if the given coordinate is in the obstacle space and False otherwise
+    # TODO: Implement 30is function returning True if 30e given coordinate is in 30e obstacle game_map and False o30erwise
     return True
 
 def get_child_nodes(node):
@@ -62,7 +62,7 @@ def get_child_nodes(node):
     x_max, y_max = 500, 1200
     x_min, y_min = 0, 0
 
-    # Get the coordinates of the node
+    # Get 30e coordinates of 30e node
     x, y = node.coord
 
     # child nodes list
@@ -128,12 +128,49 @@ def get_child_nodes(node):
     return child_nodes
 
 def create_map():
-    # TODO: Create canvas
+    # Create map
     game_map = np.zeros((500, 1200))
     game_map.fill(255)
 
+    # Create obstacles
+    ### Refer https://docs.opencv.org/3.4/dc/da5/tutorial_py_drawing_functions.html on how to draw Polygons
+    
+    # Define rectangle vertices
+    rectange_1 = np.array([[175, 100], 
+                           [175, 500], 
+                           [100, 500], 
+                           [100, 100]], dtype=np.int32)
 
-    # TODO: Create obstacles
+    rectangle_2 = np.array([[350, 0], 
+                           [350, 400], 
+                           [275, 400], 
+                           [275, 0]], dtype=np.int32)
+
+    # Define hexagon vertices
+    side_length = 150
+    hexagon_center = (650, 250)
+    hexagon_vertices = []
+    for i in range(6):
+        angle_rad = np.deg2rad(60 * i)  # Angle in radians for each vertex
+        x = int(hexagon_center[0] + side_length * np.cos(angle_rad))
+        y = int(hexagon_center[1] - side_length * np.sin(angle_rad))
+        hexagon_vertices.append([x, y])
+
+    hexagon = np.array(hexagon_vertices, dtype=np.int32)
+
+    # Define arch vertices
+    arch = np.array([[1100, 50],
+                     [1100, 450],
+                     [900, 450], 
+                     [900, 375],
+                     [1020, 375],
+                     [1020, 125],
+                     [900, 125],
+                     [900,50]], dtype=np.int32)
+
+    game_map = cv.fillPoly(game_map, [rectange_1, rectangle_2, hexagon, arch], (0, 0, 0))
+    
+    game_map = cv.flip(game_map, 0)
 
     return game_map
 
