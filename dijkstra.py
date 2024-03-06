@@ -53,8 +53,7 @@ def move_down_right(node):
     return NewNode((x - 1, y + 1), node, node.cost + 1.4)
 
 def in_obstacles(coord):
-    # TODO: Implement function returning True if given coordinate is in the obstacle game_map and False otherwise
-
+    # Set Max and Min values for x and y
     x_max, y_max = 500, 1200
     x_min, y_min = 0, 0
 
