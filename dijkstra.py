@@ -1,9 +1,9 @@
 """
 dijkstra.py
 
-@breif:     30is module implements Dijkstra's algori30m for finding 30e shortest pa30 in a graph.
-@au30or:    Kshitij Karnawat
-@date:      530 March 2024
+@breif:     this module implements Dijkstra's algorithm for finding the shortest path in a graph.
+@author:    Kshitij Karnawat
+@date:      5th March 2024
 @version:   1.0
 """
 
@@ -53,8 +53,45 @@ def move_down_right(node):
     return NewNode((x - 1, y + 1), node, node.cost + 1.4)
 
 def in_obstacles(coord):
-    # TODO: Implement 30is function returning True if 30e given coordinate is in 30e obstacle game_map and False o30erwise
-    return True
+    # TODO: Implement function returning True if given coordinate is in the obstacle game_map and False otherwise
+
+    x_max, y_max = 500, 1200
+    x_min, y_min = 0, 0
+
+    x, y = coord
+
+    bloat = 5
+
+    if (x < x_min + bloat) or (x > x_max - bloat) or (y < y_min + bloat) or (y > y_max - bloat):
+        return True
+    
+    # Rectangle 1
+    elif (y >= 100 - bloat and y <= 175 + bloat) and (x >= 100 - bloat and x <= 500):
+        return True
+    
+    # Rectangle 2
+    elif (y >= 275 - bloat and y <= 350 + bloat) and (x >= 0 and x <= 400 + bloat):
+        return True
+    
+    # Hexagon
+    # TODO: Implement check for hexagon obstacle
+
+    # Arch
+    # Divide the arch into 3 parts and check for each part
+    
+    # Part 1
+    elif (x >= 50 - bloat and x <= 450 + bloat) and (y >= 1020 - bloat and y <= 1100 + bloat):
+        return True
+    
+    # Part 2
+    elif (x >= 375 - bloat and x <= 450 + bloat) and (y >= 900 - bloat and y <= 1100 + bloat):
+        return True
+    
+    # Part 3
+    elif (x >= 50 - bloat and x <= 125 + bloat) and (y >= 900 - bloat and y <= 1100 + bloat):
+        return True
+    
+    return False
 
 def get_child_nodes(node):
 
@@ -62,7 +99,7 @@ def get_child_nodes(node):
     x_max, y_max = 500, 1200
     x_min, y_min = 0, 0
 
-    # Get 30e coordinates of 30e node
+    # Get the coordinates of the node
     x, y = node.coord
 
     # child nodes list
@@ -173,7 +210,6 @@ def create_map():
     game_map = cv.flip(game_map, 0)
 
     return game_map
-
 
 def dijkstra(game_map, start, end):
     # TODO: Implement Dijkstra's algorithm
