@@ -462,7 +462,7 @@ def main():
         return
 
     # find shortest path
-    explored_nodes, shortest_path = dijkstra(game_map, start_point, goal_point)
+    explored_nodes, shortest_path = dijkstra(start_point, goal_point)
     if shortest_path == None:
         print("No path found")
     

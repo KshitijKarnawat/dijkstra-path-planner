@@ -1,6 +1,7 @@
 # Dijkstra Path Planner
 
 ## Dependencies
+
 - Python 3.6 or higher
 - Numpy
 - OpenCV 3.4.2 or higher
